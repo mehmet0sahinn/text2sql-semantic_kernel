@@ -81,7 +81,7 @@ With `FunctionChoiceBehavior.Auto()`, the LLM can automatically choose which fun
 
 ---
 
-## Techn
+## Tech
 
 - Azure OpenAI (GPT-4, Embeddings)
 - Azure AI Search (Vector + Hybrid Search)
