@@ -1,0 +1,28 @@
+# Set variables for resource group, server name, and database name
+$resourceGroupName="mehmet-rg-intelligent-apps-hackathon"
+$serverName="mehmet-sql-c8"
+$databaseName="AdventureWorks"
+$location='swedencentral'
+$adminUsername='sqladmin'
+$adminPassword='AIhackathon1234'
+$bacpacFileUri="https://aidevtrackhackathon.blob.core.windows.net/dbbackup/AdventureWorksDb.bacpac"
+$storageKey="""Anonymous"""
+
+# Create a resource group
+az group create --name $resourceGroupName --location $location
+
+# Create a SQL server
+az sql server create --name $serverName --resource-group $resourceGroupName --location $location --admin-user $adminUsername --admin-password $adminPassword
+
+# Disable Azure Active Directory authentication for the SQL server
+az sql server ad-only-auth disable --resource-group $resourceGroupName --name $serverName
+
+# Create a SQL database
+az sql db create --name $databaseName --resource-group $resourceGroupName --server $serverName --edition "Standard" --service-objective "S2" --family None --capacity 50 --max-size 20GB --backup-storage-redundancy "Local"
+
+# Create a firewall rule to allow access to the SQL server
+az sql server firewall-rule create --resource-group $resourceGroupName --server $serverName --name "AllowAll" --start-ip-address "0.0.0.0" --end-ip-address "255.255.255.255"
+
+# az sql db import --name $databaseName --resource-group $resourceGroupName --admin-user $adminUsername --admin-password $adminPassword --server $serverName  --storage-key-type  SharedAccessKey --storage-uri $bacpacFileUri --storage-key $storageKey
+az sql db import --name $databaseName --resource-group $resourceGroupName --admin-user $adminUsername --admin-password $adminPassword --server $serverName --storage-key-type SharedAccessKey --storage-uri $bacpacFileUri --storage-key $storageKey
+

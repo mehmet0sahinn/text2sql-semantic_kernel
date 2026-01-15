@@ -1,0 +1,7 @@
+python-dotenv
+semantic-kernel
+azure-search-documents
+openai
+azure-core
+azure-monitor-opentelemetry
+opentelemetry-api

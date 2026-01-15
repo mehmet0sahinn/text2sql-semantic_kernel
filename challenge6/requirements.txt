@@ -1,0 +1,5 @@
+python-dotenv
+openai
+azure-monitor-opentelemetry
+opentelemetry-api
+azure-cosmos
